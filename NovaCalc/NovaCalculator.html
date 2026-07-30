@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaCalc — Smart Mathematical Scratchpad</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Calculator Section -->
+        <main class="calculator-card">
+            <header class="calc-header">
+                <div class="brand">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">NovaCalc</span>
+                </div>
+                <div class="controls">
+                    <button id="soundToggleBtn" class="icon-btn" title="Toggle Sound Feedback">🔊</button>
+                    <button id="themeToggleBtn" class="icon-btn" title="Toggle Theme">🌙</button>
+                    <button id="sciToggleBtn" class="pill-btn">Scientific</button>
+                </div>
+            </header>
+
+            <!-- Screen Display -->
+            <section class="display-section">
+                <div class="expression-line" id="expressionDisplay"></div>
+                <div class="main-input-line">
+                    <span class="eval-preview" id="evalPreview">= 0</span>
+                    <input type="text" id="calcInput" placeholder="0" autocomplete="off" autofocus>
+                </div>
+            </section>
+
+            <!-- Memory Slots -->
+            <section class="memory-bar">
+                <button class="mem-btn" onclick="useMemory(0)">M1: <span id="m1Val">0</span></button>
+                <button class="mem-btn" onclick="useMemory(1)">M2: <span id="m2Val">0</span></button>
+                <button class="mem-btn" onclick="useMemory(2)">M3: <span id="m3Val">0</span></button>
+                <button class="mem-action-btn" onclick="storeMemory()">Store M1</button>
+            </section>
+
+            <!-- Keypad Grid -->
+            <section class="keypad" id="keypad">
+                <!-- Scientific Panel (hidden by default) -->
+                <div class="sci-panel hidden" id="sciPanel">
+                    <button class="btn func" data-insert="sin(">sin</button>
+                    <button class="btn func" data-insert="cos(">cos</button>
+                    <button class="btn func" data-insert="tan(">tan</button>
+                    <button class="btn func" data-insert="sqrt(">√</button>
+                    <button class="btn func" data-insert="log(">log</button>
+                    <button class="btn func" data-insert="ln(">ln</button>
+                    <button class="btn func" data-insert="^">x^y</button>
+                    <button class="btn func" data-insert="3.14159265">π</button>
+                    <button class="btn func" data-insert="2.71828182">e</button>
+                    <button class="btn func" data-insert="abs(">abs</button>
+                </div>
+
+                <!-- Basic Keypad -->
+                <div class="basic-panel">
+                    <button class="btn danger" id="clearBtn">AC</button>
+                    <button class="btn action" id="backspaceBtn">⌫</button>
+                    <button class="btn func" data-insert="(">(</button>
+                    <button class="btn func" data-insert=")">)</button>
+
+                    <button class="btn op" data-insert="/">÷</button>
+                    <button class="btn num" data-insert="7">7</button>
+                    <button class="btn num" data-insert="8">8</button>
+                    <button class="btn num" data-insert="9">9</button>
+
+                    <button class="btn op" data-insert="*">×</button>
+                    <button class="btn num" data-insert="4">4</button>
+                    <button class="btn num" data-insert="5">5</button>
+                    <button class="btn num" data-insert="6">6</button>
+
+                    <button class="btn op" data-insert="-">−</button>
+                    <button class="btn num" data-insert="1">1</button>
+                    <button class="btn num" data-insert="2">2</button>
+                    <button class="btn num" data-insert="3">3</button>
+
+                    <button class="btn op" data-insert="+">+</button>
+                    <button class="btn num" data-insert="0">0</button>
+                    <button class="btn num" data-insert=".">.</button>
+                    <button class="btn equals" id="equalsBtn">=</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Interactive History Tape Drawer -->
+        <aside class="tape-sidebar">
+            <div class="tape-header">
+                <h2>Calculation Tape</h2>
+                <div class="tape-actions">
+                    <button id="exportMdBtn" class="small-btn" title="Export as Markdown">Export .md</button>
+                    <button id="clearTapeBtn" class="small-btn danger-text">Clear</button>
+                </div>
+            </div>
+            <div class="tape-list" id="tapeList">
+                <div class="tape-empty">No calculations yet. Enter an expression to begin!</div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
